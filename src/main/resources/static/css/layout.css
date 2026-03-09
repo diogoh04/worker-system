@@ -1,0 +1,61 @@
+body{
+    font-family: Arial;
+    background:#f4f6f8;
+    padding:40px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+}
+
+input{
+    padding:10px;
+    margin:5px;
+    width:180px;
+}
+
+button{
+    padding:10px 15px;
+    background:#2c7be5;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1a5fd1;
+}
+
+.delete{
+    background:#e63757;
+}
+
+.delete:hover{
+    background:#c92d4a;
+}
+
+.edit{
+    background:#f6c343;
+}
+
+table{
+    width:100%;
+    margin-top:20px;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
