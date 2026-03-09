@@ -1,6 +1,7 @@
 package backend;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.FrameworkServlet;
 
 import java.util.List;
 
@@ -11,13 +12,18 @@ public class WorkerController {
 
    private final WorkerRepository repository;
 
-   public WorkerController(WorkerRepository repository) {
+    public WorkerController(WorkerRepository repository, FrameworkServlet frameworkServlet) {
        this.repository = repository;
-   }
+    }
 
     @GetMapping
     public List<Worker> listar() {
        return repository.findAll();
+    }
+
+    @GetMapping("/search/predio")
+    public List<Worker> buscarPorPredio(@RequestParam String Predio) {
+       return repository.findByPredioContainingIgnoreCase(Predio);
     }
 
     @PostMapping
