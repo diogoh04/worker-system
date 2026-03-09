@@ -79,15 +79,16 @@
     <input id="nome" placeholder="Nome">
     <input id="email" placeholder="Email">
     <input id="predio" placeholder="Prédio">
-    <input id="telefone" placeholder="Telefone">
+    <input type="text" id="data" placeholder="Buscar por nome">
     <input type="text" id="buscarPredio" placeholder="Buscar por prédio"/>
 
 
     <br>
-
+    <button onclick="BuscarNome()">Buscar nome</button>
     <button onClick="buscarPredio()">Buscar prédio</button>
     <button onclick="criarWorker()">Salvar</button>
     <button onclick="limpar()">Limpar</button>
+    <button onclick="carregarWorkers()">Mostrar Todos</button>
 
     <br><br>
 
@@ -255,6 +256,13 @@
 
     listar();
 
+    function buscarNome() {
+        const nome = document.getElementById("buscarNome").value;
+        fetch(`/workers/ search?name=${nome}`)
+        .then(resposta => resposta.json())
+            .then(date => render(date));
+    }
+
     function buscarPredio() {
         const predio = document.getElementById("buscarPredio").value;
 
@@ -262,6 +270,14 @@
     .then(res => res.json())
             .then(data => renderWorkers(data));
     }
+
+    function carregarWorkers() {
+        fetch("/workers")
+        .then(res => res.json())
+        .then(data => render(workers, data));
+    }
+
+    window.onload =  carregarWorkers();
 
 </script>
 
