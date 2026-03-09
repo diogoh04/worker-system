@@ -15,7 +15,7 @@ function render(listaWorkers){
 <td>${w.predio}</td>
 
 <td>
-<a href="https://wa.me/55${w.telefone}" target="_blank">
+<a href="https://wa.me/${w.telefone.replace(/\D/g,"")}" target="_blank">
 📱 ${w.telefone}
 </a>
 </td>
