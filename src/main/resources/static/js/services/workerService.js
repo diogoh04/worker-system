@@ -15,9 +15,10 @@ async function criarWorker(){
 
         nome:document.getElementById("nome").value,
         email:document.getElementById("email").value,
-        predio:document.getElementById("predio").value,
-        telefone:document.getElementById("telefone").value
-
+        telefone:document.getElementById("telefone").value,
+        predio: {
+            id: document.getElementById("predio").value
+        }
     };
 
     if(editId==null){
@@ -70,12 +71,20 @@ function limpar(){
 
 }
 
-function buscar(){
+function buscarWorkers() {
+    let tipo = document.getElementById("tipoBusca").value;
+    let valor = document.getElementById("Busca").value.toLowerCase();
 
-    const texto=document.getElementById("busca").value.toLowerCase();
+    let linhas = document.querySelectorAll("tbody tr");
+    linhas.forEach(linha=> {
+        let nome = linha.children[1].textContent.toLowerCase();
+        let predio = linha.children[3].textContent.toLowerCase();
 
-    const filtrado=workers.filter(w=>w.nome.toLowerCase().includes(texto));
-
-    render(filtrado);
-
+        if (tipo === "nome"){
+            linha.style.display = nome.includes(valor)? "" : "none";
+        } else if (tipo === "predio"){
+            linha.style.display = predio.includes(valor)? "" : "none";
+    }
+});
 }
+document.getElementById("Busca").addEventListener("keyup", buscarWorkers);

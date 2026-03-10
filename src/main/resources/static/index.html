@@ -16,7 +16,9 @@
 
     <input id="nome" placeholder="Nome">
     <input id="email" placeholder="Email">
-    <input id="predio" placeholder="Prédio">
+    <select id="predio">
+        <option value="">Selecione o prédio</option>
+    </select>
     <input id="telefone" placeholder="Telefone">
 
     <br>
@@ -27,7 +29,11 @@
 
     <br><br>
 
-    <input id="busca" placeholder="Buscar por nome" onkeyup="buscar()">
+    <select id="tipoBusca">
+        <option value="nome">Buscar por Nome</option>
+        <option value="predio">Buscar por Prédio</option>
+    </select>
+    <input type="text" id="buscar" placeholder="Digite para buscar">
 
     <h2>Lista de Workers</h2>
 

@@ -36,4 +36,26 @@ async function atualizarWorkerAPI(id, worker){
         body:JSON.stringify(worker)
     });
 
+    async function carregarPredios() {
+
+        const response = await fetch("/predio");
+        const predios = await response.json();
+
+        const select = document.getElementById("predio");
+
+        select.innerHTML = '<option value="">Selecione o prédio</option>';
+
+        predios.forEach(predio => {
+
+            const option = document.createElement("option");
+
+            option.value = predio.id;
+            option.textContent = predio.nome;
+
+            select.appendChild(option);
+
+        });
+
+    }
+
 }

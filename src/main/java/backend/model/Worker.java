@@ -1,4 +1,4 @@
-package backend;
+package backend.model;
 import jakarta.persistence.*;
 
 
@@ -11,13 +11,15 @@ public class Worker {
 
     private String nome;
     private String email;
-    private String predio;
     private String telefone;
+    @ManyToOne
+    @JoinColumn(name = "predios")
+    private Predio predio;
 
     public Worker() {
     }
 
-    public Worker(Long id, String nome, String email, String predio, String telefone) {
+    public Worker(Long id, String nome, String email, Predio predio, String telefone) {
         this.nome = nome;
         this.email = email;
         this.predio = predio;
@@ -44,11 +46,11 @@ public class Worker {
         this.email = email;
     }
 
-    public String getPredio() {
+    public Predio getPredio() {
         return predio;
     }
 
-    public void setPredio(String predio) {
+    public void setPredio(Predio predio) {
         this.predio = predio;
     }
 
