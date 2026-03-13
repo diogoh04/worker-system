@@ -86,7 +86,8 @@ function buscarWorkers() {
             linha.style.display = predio.includes(valor) ? "" : "none";
         }
     });
-
 }
-document.getElementById("busca").addEventListener("keyup", buscarWorkers);
-listar();
+document.addEventListener("DOMContentLoaded", () => {
+     listar();
+     document.getElementById("buscar").addEventListener("keyup", buscarWorkers);
+});
