@@ -38,7 +38,7 @@ async function atualizarWorkerAPI(id, worker){
 
     async function carregarPredios() {
 
-        const response = await fetch("/predio");
+        const response = await fetch("/worker/predio");
         const predios = await response.json();
 
         const select = document.getElementById("predio");
@@ -50,12 +50,12 @@ async function atualizarWorkerAPI(id, worker){
             const option = document.createElement("option");
 
             option.value = predio.id;
-            option.textContent = predio.nome;
+            option.textContent = predio.name;
 
             select.appendChild(option);
 
         });
 
     }
-
+    document.addEventListener("DOMContentLoaded", carregarPredios);
 }

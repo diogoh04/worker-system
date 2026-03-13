@@ -73,18 +73,20 @@ function limpar(){
 
 function buscarWorkers() {
     let tipo = document.getElementById("tipoBusca").value;
-    let valor = document.getElementById("Busca").value.toLowerCase();
+    let valor = document.getElementById("busca").value.toLowerCase();
 
     let linhas = document.querySelectorAll("tbody tr");
-    linhas.forEach(linha=> {
+    linhas.forEach(linha => {
         let nome = linha.children[1].textContent.toLowerCase();
         let predio = linha.children[3].textContent.toLowerCase();
 
-        if (tipo === "nome"){
-            linha.style.display = nome.includes(valor)? "" : "none";
-        } else if (tipo === "predio"){
-            linha.style.display = predio.includes(valor)? "" : "none";
-    }
-});
+        if (tipo === "nome") {
+            linha.style.display = nome.includes(valor) ? "" : "none";
+        } else if (tipo === "predio") {
+            linha.style.display = predio.includes(valor) ? "" : "none";
+        }
+    });
+
 }
-document.getElementById("Busca").addEventListener("keyup", buscarWorkers);
+document.getElementById("busca").addEventListener("keyup", buscarWorkers);
+listar();
