@@ -17,7 +17,7 @@ async function criarWorker(){
         email:document.getElementById("email").value,
         telefone:document.getElementById("telefone").value,
         predio: {
-            id: document.getElementById("predio").value
+            id: Number(document.getElementById("predio").value)
         }
     };
 
@@ -53,7 +53,7 @@ function editar(id){
 
     document.getElementById("nome").value=worker.nome;
     document.getElementById("email").value=worker.email;
-    document.getElementById("predio").value=worker.predio;
+    document.getElementById("predio").value=worker.predio?.id;
     document.getElementById("telefone").value=worker.telefone;
 
     editId=id;
@@ -88,6 +88,17 @@ function buscarWorkers() {
     });
 }
 document.addEventListener("DOMContentLoaded", () => {
-     listar();
-     document.getElementById("buscar").addEventListener("keyup", buscarWorkers);
+        listar();
+
+        document.getElementById("busca")
+            .addEventListener("keyup", buscarWorkers);
+
+        document.getElementById("salvar")
+            .addEventListener("click", criarWorker);
+
+        document.getElementById("limpar")
+            .addEventListener("click", limpar);
+
+        document.getElementById("listar")
+            .addEventListener("click", listar);
 });
