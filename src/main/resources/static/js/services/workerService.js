@@ -90,15 +90,21 @@ function buscarWorkers() {
 document.addEventListener("DOMContentLoaded", () => {
         listar();
 
-        document.getElementById("busca")
-            .addEventListener("keyup", buscarWorkers);
+        const busca = document.getElementById("busca");
+        if (busca) {
+            busca.addEventListener("keyup", buscarWorkers);
+        }
+        const salvarBtn = document.getElementById("salvar");
+        if (salvarBtn) {
+            salvarBtn.addEventListener("click", criarWorker);
+        }
 
-        document.getElementById("salvar")
-            .addEventListener("click", criarWorker);
-
-        document.getElementById("limpar")
-            .addEventListener("click", limpar);
-
-        document.getElementById("listar")
-            .addEventListener("click", listar);
+        const limparBtn = document.getElementById("limpar");
+        if (limparBtn) {
+            limparBtn.addEventListener("click", limpar);
+        }
+        const listarBtn = document.getElementById("listar");
+        if (listarBtn) {
+            limparBtn.addEventListener("click", listar);
+        }
 });
