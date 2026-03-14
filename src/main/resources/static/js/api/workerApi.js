@@ -50,12 +50,14 @@ async function atualizarWorkerAPI(id, worker){
             const option = document.createElement("option");
 
             option.value = predio.id;
-            option.textContent = predio.name;
+            option.textContent = predio.nome;
 
             select.appendChild(option);
 
         });
 
     }
-    document.addEventListener("DOMContentLoaded", carregarPredios);
+    document.addEventListener("DOMContentLoaded", () => {
+        carregarPredios();
+    });
 }

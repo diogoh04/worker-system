@@ -94,16 +94,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (busca) {
             busca.addEventListener("keyup", buscarWorkers);
         }
-        const salvarBtn = document.getElementById("salvar");
+        const salvarBtn = document.getElementById("salvarBtn");
         if (salvarBtn) {
             salvarBtn.addEventListener("click", criarWorker);
         }
 
-        const limparBtn = document.getElementById("limpar");
+        const limparBtn = document.getElementById("limparBtn");
         if (limparBtn) {
             limparBtn.addEventListener("click", limpar);
         }
-        const listarBtn = document.getElementById("listar");
+        const listarBtn = document.getElementById("listarBtn");
         if (listarBtn) {
             limparBtn.addEventListener("click", listar);
         }
