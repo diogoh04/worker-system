@@ -42,8 +42,8 @@ public class WorkerController {
        Worker w = service.findById(id).orElseThrow();
        w.setNome(worker.getNome());
        w.setEmail(worker.getEmail());
-       w.setPredio(w.getPredio());
-       w.setTelefone(w.getTelefone());
+       w.setPredio(worker.getPredio());
+       w.setTelefone(worker.getTelefone());
        return service.salvar(w);
     }
 
