@@ -12,7 +12,7 @@ function render(listaWorkers){
 <td>${w.id}</td>
 <td>${w.nome}</td>
 <td>${w.email}</td>
-<td>${w.predio}</td>
+<td>${w.predio ? w.predio.nome : ""}</td>
 
 <td>
 <a href="https://wa.me/${w.telefone.replace(/\D/g,"")}" target="_blank">
