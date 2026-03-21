@@ -25,7 +25,7 @@ public class WorkerController {
        return service.listar();
     }
 
-    @GetMapping("/predio")
+    @GetMapping("/predios")
     public List<Predio> listarPredios() {
         return predioRepository.findAll();
     }

@@ -1,5 +1,8 @@
 package backend.model;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 
 @Entity

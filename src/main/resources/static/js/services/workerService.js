@@ -1,110 +1,139 @@
-let workers=[];
-let editId=null;
+let workers = [];
+let editId = null;
 
-async function listar(){
+const BASE_URL = "/worker";
 
-    workers = await listarWorkers();
-
-    render(workers);
-
+async function listarWorkers() {
+    const response = await fetch(BASE_URL);
+    return await response.json();
 }
 
-async function criarWorker(){
+async function listar() {
+    workers = await listarWorkers();
+    render(workers);
+}
 
-    const worker={
+async function carregarPredios() {
+    const response = await fetch("/worker/predios");
+    const predios = await response.json();
 
-        nome:document.getElementById("nome").value,
-        email:document.getElementById("email").value,
-        telefone:document.getElementById("telefone").value,
+    const select = document.getElementById("predio");
+
+    select.innerHTML = '<option value="">Selecione o prédio</option>';
+
+    predios.forEach(p => {
+        const option = document.createElement("option");
+        option.value = p.id;
+        option.text = p.nome;
+        select.appendChild(option);
+    });
+}
+
+async function criarWorkerAPI(worker) {
+    await fetch(BASE_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(worker)
+    });
+}
+
+async function atualizarWorkerAPI(id, worker) {
+    await fetch(`${BASE_URL}/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(worker)
+    });
+}
+
+async function deletarWorkerAPI(id) {
+    await fetch(`${BASE_URL}/${id}`, {
+        method: "DELETE"
+    });
+}
+
+async function criarWorker() {
+    const worker = {
+        nome: document.getElementById("nome").value,
+        email: document.getElementById("email").value,
+        telefone: document.getElementById("telefone").value,
         predio: {
             id: Number(document.getElementById("predio").value)
         }
     };
 
-    if(editId==null){
-
+    if (editId == null) {
         await criarWorkerAPI(worker);
-
-    }else{
-
-        await atualizarWorkerAPI(editId,worker);
-
-        editId=null;
-
+    } else {
+        await atualizarWorkerAPI(editId, worker);
+        editId = null;
     }
 
     limpar();
-
     listar();
-
 }
 
-async function deletar(id){
-
+async function deletar(id) {
     await deletarWorkerAPI(id);
-
     listar();
-
 }
 
-function editar(id){
+function editar(id) {
+    const worker = workers.find(w => w.id === id);
 
-    const worker=workers.find(w=>w.id===id);
+    document.getElementById("nome").value = worker.nome;
+    document.getElementById("email").value = worker.email;
+    document.getElementById("telefone").value = worker.telefone;
+    document.getElementById("predio").value = worker.predio?.id || "";
 
-    document.getElementById("nome").value=worker.nome;
-    document.getElementById("email").value=worker.email;
-    document.getElementById("predio").value=worker.predio?.id;
-    document.getElementById("telefone").value=worker.telefone;
-
-    editId=id;
-
+    editId = id;
 }
 
-function limpar(){
+function limpar() {
+    document.getElementById("nome").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("telefone").value = "";
+    document.getElementById("predio").value = "";
 
-    document.getElementById("nome").value="";
-    document.getElementById("email").value="";
-    document.getElementById("predio").value="";
-    document.getElementById("telefone").value="";
-
-    editId=null;
-
+    editId = null;
 }
-
 function buscarWorkers() {
-    let tipo = document.getElementById("tipoBusca").value;
-    let valor = document.getElementById("busca").value.toLowerCase();
+    const tipo = document.getElementById("tipoBusca").value;
+    const valor = document.getElementById("busca").value.toLowerCase();
 
-    let linhas = document.querySelectorAll("tbody tr");
-    linhas.forEach(linha => {
-        let nome = linha.children[1].textContent.toLowerCase();
-        let predio = linha.children[3].textContent.toLowerCase();
-
-        if (tipo === "nome") {
-            linha.style.display = nome.includes(valor) ? "" : "none";
-        } else if (tipo === "predio") {
-            linha.style.display = predio.includes(valor) ? "" : "none";
-        }
+    const filtrados = workers.filter(w => {
+        if (tipo === "nome") return w.nome.toLowerCase().includes(valor);
+        if (tipo === "email") return w.email.toLowerCase().includes(valor);
+        return true;
     });
+
+    render(filtrados);
 }
+
 document.addEventListener("DOMContentLoaded", () => {
-        listar();
+    listar();
+    carregarPredios();
 
-        const busca = document.getElementById("busca");
-        if (busca) {
-            busca.addEventListener("keyup", buscarWorkers);
-        }
-        const salvarBtn = document.getElementById("salvarBtn");
-        if (salvarBtn) {
-            salvarBtn.addEventListener("click", criarWorker);
-        }
+    const busca = document.getElementById("busca");
+    if (busca) {
+        busca.addEventListener("keyup", buscarWorkers);
+    }
 
-        const limparBtn = document.getElementById("limparBtn");
-        if (limparBtn) {
-            limparBtn.addEventListener("click", limpar);
-        }
-        const listarBtn = document.getElementById("listarBtn");
-        if (listarBtn) {
-            limparBtn.addEventListener("click", listar);
-        }
+    const salvarBtn = document.getElementById("salvarBtn");
+    if (salvarBtn) {
+        salvarBtn.addEventListener("click", criarWorker);
+    }
+
+    const limparBtn = document.getElementById("limparBtn");
+    if (limparBtn) {
+        limparBtn.addEventListener("click", limpar);
+    }
+
+    const listarBtn = document.getElementById("listarBtn");
+    if (listarBtn) {
+        listarBtn.addEventListener("click", listar);
+    }
 });
