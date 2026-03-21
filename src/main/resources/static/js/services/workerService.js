@@ -14,7 +14,7 @@ async function listar() {
 }
 
 async function carregarPredios() {
-    const response = await fetch("/worker/predios");
+    const response = await fetch("https://worker-system.onrender.com/worker/predios");
     const predios = await response.json();
 
     const select = document.getElementById("predio");
