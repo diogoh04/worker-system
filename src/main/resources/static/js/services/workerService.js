@@ -101,12 +101,14 @@ function limpar() {
     editId = null;
 }
 function buscarWorkers() {
+    console.log(workers);
     const tipo = document.getElementById("tipoBusca").value;
     const valor = document.getElementById("busca").value.toLowerCase();
 
     const filtrados = workers.filter(w => {
         if (tipo === "nome") return w.nome.toLowerCase().includes(valor);
         if (tipo === "email") return w.email.toLowerCase().includes(valor);
+        if (tipo === "predio") { return w.predio?.nome?.toLowerCase().includees(valor);}
         return true;
     });
 
