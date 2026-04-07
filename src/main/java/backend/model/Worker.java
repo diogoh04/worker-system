@@ -25,6 +25,9 @@ public class Worker {
     @JsonIgnore
     private Predio predio;
 
+    public Worker() {
+    }
+
     public Worker(Long id, String nome, String email, String staffNumber, String position,Predio predio, String telefone) {
         this.nome = nome;
         this.email = email;
