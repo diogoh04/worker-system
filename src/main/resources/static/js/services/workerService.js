@@ -117,6 +117,9 @@ function buscarWorkers() {
             : w.predio?.nome;
             return nomePredio?.toLowerCase().includes(valor);
         }
+        if (tipo === "position") {
+            return w.position?.toLowerCase().includes(valor);
+        }
         return true;
     });
 
