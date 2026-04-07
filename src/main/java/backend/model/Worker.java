@@ -1,4 +1,5 @@
 package backend.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -21,6 +22,7 @@ public class Worker {
     private String telefone;
     @ManyToOne
     @JoinColumn(name = "predios")
+    @JsonIgnore
     private Predio predio;
 
     public Worker(Long id, String nome, String email, String staffNumber, String position,Predio predio, String telefone) {
