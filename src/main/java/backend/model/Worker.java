@@ -14,7 +14,9 @@ public class Worker {
 
     private String nome;
     private String email;
+    @Column(name = "staff_number")
     private String staffNumber;
+    @Column(name = "position")
     private String position;
     private String telefone;
     @ManyToOne
