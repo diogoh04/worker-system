@@ -59,6 +59,8 @@ async function criarWorker() {
     const worker = {
         nome: document.getElementById("nome").value,
         email: document.getElementById("email").value,
+        staffNumber: document.getElementById("staffNumber").value,
+        position: document.getElementById("position").value,
         telefone: document.getElementById("telefone").value,
         predio: {
             id: Number(document.getElementById("predio").value)

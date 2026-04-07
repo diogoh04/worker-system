@@ -16,6 +16,12 @@
 
     <input id="nome" placeholder="Nome">
     <input id="email" placeholder="Email">
+    <input type="text" id="staffNumber" placeholder="Staff Number">
+    <select id="position">
+        <option value="">Selecione posição</option>
+        <option value="cleaner">Cleaner</option>
+        <option value="team_leader">Team Leader</option>
+    </select>
     <select id="predio">
         <option value="">Selecione o prédio</option>
     </select>
@@ -30,8 +36,8 @@
     <br><br>
 
     <select id="tipoBusca">
-        <option value="nome">Buscar por Nome</option>
-        <option value="predio">Buscar por Prédio</option>
+        <option value="nome">Search by name</option>
+        <option value="predio">Search by Building</option>
     </select>
     <input type="text" id="busca" placeholder="Digite para buscar">
 
@@ -44,6 +50,8 @@
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
+            <th>Staff Number</th>
+            <th>Position</th>
             <th>Prédio</th>
             <th>Telefone</th>
             <th>Ações</th>

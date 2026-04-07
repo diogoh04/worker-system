@@ -14,17 +14,18 @@ public class Worker {
 
     private String nome;
     private String email;
+    private String staffNumber;
+    private String position;
     private String telefone;
     @ManyToOne
     @JoinColumn(name = "predios")
     private Predio predio;
 
-    public Worker() {
-    }
-
-    public Worker(Long id, String nome, String email, Predio predio, String telefone) {
+    public Worker(Long id, String nome, String email, String staffNumber, String position,Predio predio, String telefone) {
         this.nome = nome;
         this.email = email;
+        this.staffNumber = staffNumber;
+        this.position = position;
         this.predio = predio;
         this.telefone = telefone;
     }
@@ -48,6 +49,12 @@ public class Worker {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getStaffNumber() { return staffNumber;}
+    public void setStaffNumber(String staffNumber) { this.staffNumber = staffNumber; }
+
+    public String getPosition() { return position; }
+    public void setPosition(String position) { this.position = position; }
 
     public Predio getPredio() {
         return predio;
