@@ -22,7 +22,6 @@ public class Worker {
     private String telefone;
     @ManyToOne
     @JoinColumn(name = "predios")
-    @JsonIgnore
     private Predio predio;
 
     public Worker() {

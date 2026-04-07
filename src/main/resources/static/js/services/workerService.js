@@ -111,6 +111,7 @@ function buscarWorkers() {
         if (tipo === "nome") return w.nome.toLowerCase().includes(valor);
         if (tipo === "email") return w.email.toLowerCase().includes(valor);
         if (tipo === "predio") {
+            if (!w.predio) return false;
         const nomePredio =
             typeof w.predio === "string"
             ? w.predio
