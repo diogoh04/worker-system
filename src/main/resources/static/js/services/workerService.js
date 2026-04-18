@@ -1,5 +1,33 @@
 let workers = [];
 let editId = null;
+let workerSelecionado = null;
+
+function abrirFeedback(id) {
+  workerSelecionado = id;
+  document.getElementById("modalFeedback").style.display = "block";
+}
+
+function fecharModal() {
+  document.getElementById("modalFeedback").style.display = "none";
+}
+
+async function salvarFeedback() {
+  const texto = document.getElementById("textoFeedback").value;
+
+  if (!texto) return;
+
+  await fetch(`/workers/${workerSelecionado}/feedback`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ texto })
+  });
+
+  fecharModal();
+  document.getElementById("textoFeedback").value = "";
+  alert("Feedback salvo!");
+}
 
 const BASE_URL = "/worker";
 

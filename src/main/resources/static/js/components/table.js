@@ -1,3 +1,20 @@
+async function abrirFeedback(id) {
+  const texto = prompt("Digite o feedback:");
+
+  if (!texto) return;
+
+  await fetch(`/workers/${id}/feedback`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ feedback: texto })
+  });
+
+  alert("Feedback salvo!");
+  listar(); // atualiza tabela
+}
+
 function render(listaWorkers){
 
     const lista = document.getElementById("lista");
@@ -26,6 +43,7 @@ function render(listaWorkers){
 
 <button class="delete" onclick="deletar(${w.id})">Excluir</button>
 
+<button onclick="abrirFeedback(${worker.id})">Feedback</button>
 </td>
 
 </tr>
