@@ -14,11 +14,8 @@ public class Worker {
     private Long id;
 
     private String nome;
-    private String email;
     @Column(name = "staff_number")
     private String staffNumber;
-    @Column(name = "position")
-    private String position;
     private String telefone;
     @ManyToOne
     @JoinColumn(name = "predios")
@@ -27,11 +24,9 @@ public class Worker {
     public Worker() {
     }
 
-    public Worker(Long id, String nome, String email, String staffNumber, String position,Predio predio, String telefone) {
+    public Worker(Long id, String nome, String staffNumber,Predio predio, String telefone) {
         this.nome = nome;
-        this.email = email;
         this.staffNumber = staffNumber;
-        this.position = position;
         this.predio = predio;
         this.telefone = telefone;
     }
@@ -48,19 +43,8 @@ public class Worker {
         this.nome = nome;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getStaffNumber() { return staffNumber;}
     public void setStaffNumber(String staffNumber) { this.staffNumber = staffNumber; }
-
-    public String getPosition() { return position; }
-    public void setPosition(String position) { this.position = position; }
 
     public Predio getPredio() {
         return predio;

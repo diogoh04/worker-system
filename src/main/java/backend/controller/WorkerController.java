@@ -41,9 +41,7 @@ public class WorkerController {
     public Worker atualizar(@PathVariable Long id, @RequestBody Worker worker){
        Worker w = service.findById(id).orElseThrow();
        w.setNome(worker.getNome());
-       w.setEmail(worker.getEmail());
         w.setStaffNumber(worker.getStaffNumber());
-        w.setPosition(worker.getPosition());
        w.setPredio(worker.getPredio());
        w.setTelefone(worker.getTelefone());
        return service.salvar(w);

@@ -11,9 +11,7 @@ function render(listaWorkers){
 
 <td>${w.id}</td>
 <td>${w.nome}</td>
-<td>${w.email}</td>
 <td>${w.staffNumber}</td>
-<td>${w.position}</td>
 <td>${w.predio ? w.predio.nome : ""}</td>
 
 <td>

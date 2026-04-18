@@ -58,9 +58,7 @@ async function deletarWorkerAPI(id) {
 async function criarWorker() {
     const worker = {
         nome: document.getElementById("nome").value,
-        email: document.getElementById("email").value,
         staffNumber: document.getElementById("staffNumber").value,
-        position: document.getElementById("position").value,
         telefone: document.getElementById("telefone").value,
         predio: {
             id: Number(document.getElementById("predio").value)
@@ -87,7 +85,7 @@ function editar(id) {
     const worker = workers.find(w => w.id === id);
 
     document.getElementById("nome").value = worker.nome;
-    document.getElementById("email").value = worker.email;
+    document.getElementById("staffNumber").value = worker.staffNumber
     document.getElementById("telefone").value = worker.telefone;
     document.getElementById("predio").value = worker.predio?.id || "";
 
@@ -96,7 +94,6 @@ function editar(id) {
 
 function limpar() {
     document.getElementById("nome").value = "";
-    document.getElementById("email").value = "";
     document.getElementById("telefone").value = "";
     document.getElementById("predio").value = "";
 
@@ -109,7 +106,6 @@ function buscarWorkers() {
 
     const filtrados = workers.filter(w => {
         if (tipo === "nome") return w.nome.toLowerCase().includes(valor);
-        if (tipo === "email") return w.email.toLowerCase().includes(valor);
         if (tipo === "predio") {
             if (!w.predio) return false;
         const nomePredio =
@@ -118,10 +114,6 @@ function buscarWorkers() {
             : w.predio?.nome;
             return nomePredio?.toLowerCase().includes(valor);
         }
-        if (tipo === "position") {
-            return w.position?.toLowerCase().includes(valor);
-        }
-        return true;
     });
 
     render(filtrados);
