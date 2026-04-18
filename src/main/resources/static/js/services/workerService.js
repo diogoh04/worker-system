@@ -128,23 +128,28 @@ function fecharModal() {
 }
 
 async function salvarFeedback() {
-  const texto = document.getElementById("textoFeedback").value;
+    const texto = document.getElementById("textoFeedback").value;
 
-  if (!texto) return;
+    if (!texto) return;
 
-  await fetch(`/workers/${workerSelecionado}/feedback`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ texto })
-  });
+    const response = await fetch(`/worker/${workerSelecionado}/feedback`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ texto: texto })
+    });
 
-  fecharModal();
-  document.getElementById("textoFeedback").value = "";
-  alert("Feedback salvo!");
+    if (!response.ok) {
+        alert("Erro ao salvar feedback");
+        return;
+    }
+
+    fecharModal();
+    document.getElementById("textoFeedback").value = "";
+    alert("Feedback salvo!");
+    listar();
 }
-
 
     render(filtrados);
 }
