@@ -1,5 +1,4 @@
 
-
 function render(listaWorkers){
 
     const lista = document.getElementById("lista");

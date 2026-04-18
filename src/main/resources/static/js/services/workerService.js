@@ -50,6 +50,24 @@ async function atualizarWorkerAPI(id, worker) {
     });
 }
 
+async function abrirFeedback(id) {
+  const texto = prompt("Digite o feedback:");
+
+  if (!texto) return;
+
+  await fetch(`${BASE_URL}/${id}/feedback`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ texto: texto })
+  });
+
+  alert("Feedback salvo!");
+  listar();
+}
+
+
 async function deletarWorkerAPI(id) {
     await fetch(`${BASE_URL}/${id}`, {
         method: "DELETE"
@@ -132,7 +150,7 @@ async function salvarFeedback() {
 
     if (!texto) return;
 
-    const response = await fetch(`/worker/${workerSelecionado}/feedback`, {
+    const response = await fetch(`${BASE_URL}/${workerSelecionado}/feedback`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -152,23 +170,6 @@ async function salvarFeedback() {
 }
 
     render(filtrados);
-}
-
-async function abrirFeedback(id) {
-  const texto = prompt("Digite o feedback:");
-
-  if (!texto) return;
-
-  await fetch(`/worker/${id}/feedback`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ texto: texto })
-  });
-
-  alert("Feedback salvo!");
-  listar();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
