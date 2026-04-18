@@ -154,6 +154,23 @@ async function salvarFeedback() {
     render(filtrados);
 }
 
+async function abrirFeedback(id) {
+  const texto = prompt("Digite o feedback:");
+
+  if (!texto) return;
+
+  await fetch(`/worker/${id}/feedback`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ texto: texto })
+  });
+
+  alert("Feedback salvo!");
+  listar();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     listar();
     carregarPredios();

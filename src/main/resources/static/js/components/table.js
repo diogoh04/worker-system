@@ -1,19 +1,4 @@
-async function abrirFeedback(id) {
-  const texto = prompt("Digite o feedback:");
 
-  if (!texto) return;
-
-  await fetch(`/workers/${id}/feedback`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ texto: texto })
-  });
-
-  alert("Feedback salvo!");
-  listar();
-}
 
 function render(listaWorkers){
 
