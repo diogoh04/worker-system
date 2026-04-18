@@ -8,7 +8,7 @@ async function abrirFeedback(id) {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ feedback: texto })
+    body: JSON.stringify({ texto: texto })
   });
 
   alert("Feedback salvo!");
