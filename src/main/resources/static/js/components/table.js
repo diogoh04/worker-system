@@ -4,7 +4,7 @@ async function abrirFeedback(id) {
   if (!texto) return;
 
   await fetch(`/workers/${id}/feedback`, {
-    method: "PUT",
+    method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
@@ -12,7 +12,7 @@ async function abrirFeedback(id) {
   });
 
   alert("Feedback salvo!");
-  listar(); // atualiza tabela
+  listar();
 }
 
 function render(listaWorkers){
@@ -43,7 +43,7 @@ function render(listaWorkers){
 
 <button class="delete" onclick="deletar(${w.id})">Excluir</button>
 
-<button onclick="abrirFeedback(${worker.id})">Feedback</button>
+<button onclick="abrirFeedback(${w.id})">Feedback</button>
 </td>
 
 </tr>
