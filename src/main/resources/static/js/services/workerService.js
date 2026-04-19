@@ -50,24 +50,6 @@ async function atualizarWorkerAPI(id, worker) {
     });
 }
 
-async function abrirFeedback(id) {
-  const texto = prompt("Digite o feedback:");
-
-  if (!texto) return;
-
-  await fetch(`${BASE_URL}/${id}/feedback`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ texto: texto })
-  });
-
-  alert("Feedback salvo!");
-  listar();
-}
-
-
 async function deletarWorkerAPI(id) {
     await fetch(`${BASE_URL}/${id}`, {
         method: "DELETE"
@@ -154,6 +136,24 @@ function mostrarFeedbacks(lista) {
     container.appendChild(div);
   });
 }
+
+async function abrirFeedback(id) {
+      const texto = prompt("Digite o feedback:");
+
+      if (!texto) return;
+
+      await fetch(`${BASE_URL}/${id}/feedback`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ texto: texto })
+      });
+
+      alert("Feedback salvo!");
+      listar();
+    }
+
 
 function fecharModal() {
   document.getElementById("modalFeedback").style.display = "none";
