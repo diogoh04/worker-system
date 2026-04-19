@@ -3,9 +3,6 @@ let editId = null;
 let workerSelecionado = null;
 
 const BASE_URL = "/worker";
-const [isModalOpen, setIsModalOpen] = useState(false);
-const [selectedWorker, setSelectedWorker] = useState(null);
-const [feedback, setFeedback] = useState([]);
 
 async function listarWorkers() {
     const response = await fetch(BASE_URL);
@@ -138,20 +135,24 @@ function buscarWorkers() {
         }
     });
 
-    const openFeedbackModal = async (worker) => {
-      setSelectedWorker(worker);
-
-      const res = await fetch(`/feedback/${w.staff_number}`);
-      const data = await res.json();
-
-      setFeedbacks(data);
-      setIsModalOpen(true);
-    };
-
-
 function abrirFeedback(id) {
   workerSelecionado = id;
   document.getElementById("modalFeedback").style.display = "block";
+}
+function mostrarFeedbacks(lista) {
+  const container = document.getElementById("listaFeedbacks");
+  container.innerHTML = "";
+
+  if (lista.length === 0) {
+    container.innerHTML = "<p>Nenhum feedback</p>";
+    return;
+  }
+
+  lista.forEach(f => {
+    const div = document.createElement("div");
+    div.innerText = "💬 " + f.texto;
+    container.appendChild(div);
+  });
 }
 
 function fecharModal() {
@@ -159,7 +160,7 @@ function fecharModal() {
 }
 
 async function salvarFeedback() {
-    const texto = document.getElementById("textoFeedback").value;
+    const texto = document.getElementById("inputFeedback").value;
 
     if (!texto) return;
 
@@ -170,6 +171,7 @@ async function salvarFeedback() {
         },
         body: JSON.stringify({ texto: texto })
     });
+    abrirFeedback(workerSelecionado);
 
     if (!response.ok) {
         alert("Erro ao salvar feedback");
