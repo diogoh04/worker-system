@@ -62,6 +62,11 @@ public class WorkerController {
 
         return feedbackRepository.save(feedback);
     }
+    @GetMapping("/{id}/feedbacks")
+    public List<Feedback> listarFeedbacks(@PathVariable Long id) {
+        Worker worker = service.findById(id).orElseThrow();
+        return worker.getFeedbacks();
+    }
 
     @PutMapping("/{id}")
     public Worker atualizar(@PathVariable Long id, @RequestBody Worker worker){

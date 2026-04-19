@@ -117,9 +117,15 @@ function buscarWorkers() {
         }
     });
 
-function abrirFeedback(id) {
-  workerSelecionado = id;
-  document.getElementById("modalFeedback").style.display = "block";
+async function abrirFeedback(id) {
+    workerSelecionado = id;
+
+    document.getElementById("modalFeedback").style.display = "block";
+
+    const response = await fetch(`${BASE_URL}/${id}/feedbacks`);
+    const feedbacks = await response.json();
+
+    mostrarFeedbacks(feedbacks);
 }
 function mostrarFeedbacks(lista) {
   const container = document.getElementById("listaFeedbacks");
@@ -137,30 +143,8 @@ function mostrarFeedbacks(lista) {
   });
 }
 
-async function abrirFeedback(id) {
-      const texto = prompt("Digite o feedback:");
-
-      if (!texto) return;
-
-      await fetch(`${BASE_URL}/${id}/feedback`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ texto: texto })
-      });
-
-      alert("Feedback salvo!");
-      listar();
-    }
-
-
-function fecharModal() {
-  document.getElementById("modalFeedback").style.display = "none";
-}
-
 async function salvarFeedback() {
-    const texto = document.getElementById("inputFeedback").value;
+    const texto = document.getElementById("textoFeedback").value; // ✔ CORRETO
 
     if (!texto) return;
 
@@ -171,15 +155,18 @@ async function salvarFeedback() {
         },
         body: JSON.stringify({ texto: texto })
     });
-    abrirFeedback(workerSelecionado);
 
     if (!response.ok) {
         alert("Erro ao salvar feedback");
         return;
     }
 
-    fecharModal();
     document.getElementById("textoFeedback").value = "";
+
+    abrirFeedback(workerSelecionado);
+}
+function fecharModal() {
+  document.getElementById("modalFeedback").style.display = "none";
     alert("Feedback salvo!");
     listar();
 }
