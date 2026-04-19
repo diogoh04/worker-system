@@ -3,6 +3,9 @@ let editId = null;
 let workerSelecionado = null;
 
 const BASE_URL = "/worker";
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [selectedWorker, setSelectedWorker] = useState(null);
+const [feedback, setFeedback] = useState([]);
 
 async function listarWorkers() {
     const response = await fetch(BASE_URL);
@@ -134,6 +137,16 @@ function buscarWorkers() {
             return nomePredio?.toLowerCase().includes(valor);
         }
     });
+
+    const openFeedbackModal = async (worker) => {
+      setSelectedWorker(worker);
+
+      const res = await fetch(`/feedback/${w.staff_number}`);
+      const data = await res.json();
+
+      setFeedbacks(data);
+      setIsModalOpen(true);
+    };
 
 
 function abrirFeedback(id) {
