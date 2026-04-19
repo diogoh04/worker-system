@@ -117,7 +117,7 @@ function buscarWorkers() {
         }
     });
 
-async function abrirFeedback(id) {
+window.abrirFeedback = async function abrirFeedback(id) {
     workerSelecionado = id;
 
     document.getElementById("modalFeedback").style.display = "block";
